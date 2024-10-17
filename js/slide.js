@@ -1,15 +1,15 @@
-import debounce from './debounce.js'
+import debounce from "./debounce.js";
 
-export  class Slide {
+export class Slide {
   constructor(slide, wrapper) {
     this.slide = document.querySelector(slide);
     this.wrapper = document.querySelector(wrapper);
     this.dist = { finalPosition: 0, startX: 0, movement: 0 };
-    this.activeClass = 'active';
+    this.activeClass = "active";
   }
 
   transition(active) {
-    this.slide.style.transition = active ? 'transform .3s' : '';
+    this.slide.style.transition = active ? "transform .3s" : "";
   }
 
   moveSlide(distX) {
@@ -33,7 +33,7 @@ export  class Slide {
       moveType = "touchmove";
     }
     this.wrapper.addEventListener(moveType, this.onMove);
-    this.transition(false)
+    this.transition(false);
   }
 
   onMove(event) {
@@ -100,7 +100,9 @@ export  class Slide {
   }
 
   changeActiveClass() {
-    this.slideArray.forEach((item) => item.element.classList.remove(this.activeClass))
+    this.slideArray.forEach((item) =>
+      item.element.classList.remove(this.activeClass)
+    );
     this.slideArray[this.index.active].element.classList.add(this.activeClass);
   }
 
@@ -116,11 +118,11 @@ export  class Slide {
     setTimeout(() => {
       this.slidesConfig();
       this.changeSlide(this.index.active);
-    }, 1000)
+    }, 1000);
   }
 
   addResizeEvent() {
-    window.addEventListener('resize', this.onResize)
+    window.addEventListener("resize", this.onResize);
   }
 
   bindEvents() {
@@ -145,8 +147,8 @@ export  class Slide {
 
 export class SlideNav extends Slide {
   addArrow(prev, next) {
-    this.prevElement = document.querySelector(prev)
-    this.nextElement = document.querySelector(next)
+    this.prevElement = document.querySelector(prev);
+    this.nextElement = document.querySelector(next);
     this.addArrowEvents();
   }
 
@@ -155,4 +157,3 @@ export class SlideNav extends Slide {
     this.nextElement.addEventListener("click", this.activeNextSlide);
   }
 }
-
